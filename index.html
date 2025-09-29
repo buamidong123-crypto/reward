@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ALfatah.id</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+            background-color: black;
+        }
+
+        #rewardBtn {
+            padding: 12px 20px;
+            font-size: 16px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            
+        }
+
+        #adContainer {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #tombol{
+            color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <h2 id="tombol" >GAS KEUN</h2>
+    <button id="rewardBtn">Tonton Iklan untuk Klaim Hadiah</button>
+
+    <!-- Kontainer Iklan -->
+    <div id="adContainer">
+        <p>🎬 Iklan Sedang Diputar...</p>
+        <div id="adsterraAd">
+            <!-- Script iklan Adsterra -->
+            <script type='text/javascript'
+                src='//pl27745484.revenuecpmgate.com/cc/b3/91/ccb391bc8feb38744d405217744044f6.js'></script>
+        </div>
+    </div>
+
+    <script>
+        const rewardBtn = document.getElementById("rewardBtn");
+        const adContainer = document.getElementById("adContainer");
+
+        // Saat tombol reward diklik, tampilkan iklan
+        rewardBtn.addEventListener("click", () => {
+            adContainer.style.display = "block";
+
+            // Simulasi: setelah 30 detik iklan dianggap selesai → redirect
+            setTimeout(() => {
+                alert("Iklan selesai! Kamu akan kembali ke halaman utama 🎉");
+                window.location.href = "index.html";
+                // ganti "index.html" dengan URL utama websitemu
+            }, 30000);
+        });
+    </script>
+
+</body>
+
+</html>
