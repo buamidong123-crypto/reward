@@ -1,73 +1,82 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
-    <title>ALfatah.id</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemutar Video</title>
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Menambahkan gaya khusus jika diperlukan */
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 40px;
-            background-color: black;
+            font-family: 'Inter', sans-serif;
         }
-
-        #rewardBtn {
-            padding: 12px 20px;
-            font-size: 16px;
-            margin: 10px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            background: #007bff;
-            color: white;
-            
-        }
-
-        #adContainer {
-            display: none;
-            margin-top: 20px;
-        }
-
-        #tombol{
-            color: aliceblue;
+        .play-button-overlay {
+            transition: opacity 0.3s ease-in-out;
         }
     </style>
 </head>
+<body class="bg-gray-900 flex items-center justify-center h-screen overflow-hidden">
 
-<body>
-
-
-    <h2 id="tombol" >GAS KEUN</h2>
-    <button id="rewardBtn">Tonton Iklan untuk Klaim Hadiah</button>
-
-    <!-- Kontainer Iklan -->
-    <div id="adContainer">
-        <p>🎬 Iklan Sedang Diputar...</p>
-        <div id="adsterraAd">
-            <!-- Script iklan Adsterra -->
-            <script type='text/javascript'
-                src='//pl27745484.revenuecpmgate.com/cc/b3/91/ccb391bc8feb38744d405217744044f6.js'></script>
-        </div>
+    <div class="w-full max-w-lg mx-auto p-4">
+        <!-- Kontainer Video -->
+        <main>
+            <!-- Menambahkan position: relative ke kontainer ini -->
+            <div id="video-container" class="relative bg-gray-800 rounded-lg shadow-2xl overflow-hidden">
+                <!-- Rasio Aspek untuk Video -->
+                <div class="aspect-w-16 aspect-h-9">
+                    <video 
+                        id="video-player"
+                        class="w-full h-full object-cover"
+                        controls 
+                        poster="image.png"
+                        preload="metadata">
+                        <!-- Ganti 'src' dengan URL video Anda -->
+                        <source src="">
+                        <!-- Pesan fallback jika browser tidak mendukung tag video -->
+                        Browser Anda tidak mendukung tag video.
+                    </video>
+                </div>
+                <!-- Tombol Play di Tengah -->
+                <div id="play-button-overlay" class="play-button-overlay absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 cursor-pointer">
+                    <svg class="w-20 h-20 text-white opacity-80 hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script>
-        const rewardBtn = document.getElementById("rewardBtn");
-        const adContainer = document.getElementById("adContainer");
+        // Memilih elemen yang diperlukan
+        const video = document.getElementById('video-player');
+        const playButtonOverlay = document.getElementById('play-button-overlay');
 
-        // Saat tombol reward diklik, tampilkan iklan
-        rewardBtn.addEventListener("click", () => {
-            adContainer.style.display = "block";
+        // Fungsi untuk memutar video
+        const playVideo = () => {
+            video.play();
+        };
 
-            // Simulasi: setelah 30 detik iklan dianggap selesai → redirect
-            setTimeout(() => {
-                alert("Iklan selesai! Kamu akan kembali ke halaman utama 🎉");
-                window.location.href = "index.html";
-                // ganti "index.html" dengan URL utama websitemu
-            }, 30000);
+        // Event listener untuk tombol play overlay
+        playButtonOverlay.addEventListener('click', playVideo);
+
+        // Sembunyikan tombol play saat video dimulai
+        video.addEventListener('play', () => {
+            playButtonOverlay.classList.add('hidden');
         });
+
+        // Tampilkan tombol play saat video dijeda
+        video.addEventListener('pause', () => {
+            playButtonOverlay.classList.remove('hidden');
+        });
+        
+        // Tampilkan kembali tombol play saat video selesai
+        video.addEventListener('ended', () => {
+            playButtonOverlay.classList.remove('hidden');
+        });
+
     </script>
 
 </body>
-
 </html>
+
